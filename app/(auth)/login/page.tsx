@@ -25,7 +25,7 @@ const Login = () => {
     return (
         <div className="w-full h-dvh flex justify-center flex-col md:flex-row bg-background ">
             <div className="w-full md:w-1/2 flex justify-center">
-                <p className="text-3xl m-4 w-14 h-14 flex justify-center items-center font-bold p-1 border-2 border-primary rounded-full"><span className="text-primary">Y</span>S</p>
+                <p className="text-3xl m-4 w-14 h-14 flex justify-center items-center font-bold p-1 border-2 border-primary rounded-full"><span className="text-primary">Y</span>T</p>
                 <div className="hidden  m-4 md:flex flex-col gap-4 justify-center">
                     <div>
                         <h1 className="text-4xl font-bold">Bienvenue sur Yaro Tech</h1>
