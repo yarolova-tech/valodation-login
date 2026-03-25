@@ -1,34 +1,21 @@
-"use client";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/database/server-client";
+import { AuthLogoutButton } from "@/components/auth-logout-button";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+export default async function Home() {
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getSession();
+  const user = data.session?.user;
 
-const Home = () => {
-  const [connected, setConnected] = useState<boolean>(true);
-  const router = useRouter();
+  if (!user) redirect("/login");
 
-  useEffect(() => {
-    const isConnected = localStorage.getItem("connecter") === "true";
-    setConnected(isConnected);
-    if (!connected) {
-      router.push("/login");
-    }
-  }, [connected, router]);
-
-  const handleLogout = () => {
-    localStorage.setItem("connecter", "true");
-    setConnected(false);
-  };
   return (
-    <div className="flex justify-center items-center flex-col gap-3">
-      <h1 className="font-bold text-center mt-10 text-primary">
-        Bienvenue sur Yaro Tech
+    <div className="flex justify-center items-center flex-col gap-3 mt-10">
+      <h1 className="font-bold text-center text-primary">
+        Bienvenue sur Yaro Tech {user.email ?? ""}!
       </h1>
-      <button onClick={handleLogout} className="bg-primary cursor-pointer hover:scale-105 transition-all duration-500 text-white font-bold py-2 px-4 rounded">
-        Se déconnecter
-      </button>
+
+      <AuthLogoutButton />
     </div>
   );
-};
-
-export default Home;
+}

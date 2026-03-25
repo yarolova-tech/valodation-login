@@ -4,8 +4,22 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Eye, EyeClosed } from "lucide-react"
 
+type FormFieldLike = {
+  name: string;
+  state: {
+    value: string;
+    meta: {
+      isTouched: boolean;
+      isValid: boolean;
+      errors?: Array<{ message?: string } | undefined>;
+    };
+  };
+  handleBlur: (event?: unknown) => void;
+  handleChange: (value: string) => void;
+};
+
 type FormInputFieldProps = {
-    field: any
+    field: FormFieldLike
     label: string
     placeholder?: string
     type?: string
